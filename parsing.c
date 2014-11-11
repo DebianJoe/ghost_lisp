@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "mpc.h" /* link to mpc parser */
 
 /* If we are compiling on Windows compile these functions */
 /* allow the preprocessor to do it's thing */
