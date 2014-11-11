@@ -10,3 +10,5 @@ This is more about making transparent primitives (heh, 'ghost' 'tranparent'...ge
 requirements
 =====
 During development, I'm using Debian's editline from libedit-dev.  I plan to make it totally self-included, but that's once it's working.
+
+also, you'll need mpc.c and mpc.h from https://github.com/orangeduck/mpc.  Nice libs there, holmes!  Just pull these into your build library before compliling.
