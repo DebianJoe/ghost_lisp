@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* these do not perfectly suit my needs.
+/* these do not perfectly suit my needs. */
 /* so, let's make new editline headers later. */
 
 #include <editline/readline.h>
@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
 	add_history(input);
 	
 	/* Echo user input back */
-	printf("No, you're a %s", input);
+	printf("No, you're a %s\n", input);
 
 	/* Free memory used in input */
 	free(input);
