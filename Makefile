@@ -1,2 +1,2 @@
 all:
-	cc -std=c99 -Wall prompt.c -ledit -o prompt
+	cc -std=c99 -Wall parsing.c -ledit -o parsing
