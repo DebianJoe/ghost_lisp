@@ -50,9 +50,11 @@ int main(int argc, char** argv) {
     Number, Operator, Expr, Lispy);
 
 /* Print Version and Exit Information */
-    puts("Ghost Lisp v. 0.0.0.0.1");
-    puts("...hold me, I'm scared\n  |\\___  ");
-    puts("(:o ___( \n  |/     ");
+    puts("Ghost Lisp v. 0.0.0.0.1  .-.");
+    puts("...hold me, I'm scared  (o o)");
+    puts("                        | O \\ ");
+    puts("                        \\    \\ ");
+    puts("                         `~~~'");
     puts("Press C^c to exit\n");
 
     /* Infinity loops! */
