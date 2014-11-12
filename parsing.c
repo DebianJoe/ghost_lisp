@@ -51,7 +51,8 @@ int main(int argc, char** argv) {
 
 /* Print Version and Exit Information */
     puts("Ghost Lisp v. 0.0.0.0.1");
-    puts("...hold me, I'm scared\n");
+    puts("...hold me, I'm scared\n  |\\___  ");
+    puts("(:o ___( \n  |/     ");
     puts("Press C^c to exit\n");
 
     /* Infinity loops! */
