@@ -3,7 +3,7 @@
 #include "mpc.h" /* link to mpc parser */
 
 /* If we are compiling on Windows compile these functions */
-/* allow the preprocessor to do it's thing */
+/* allow the preprocessor to do its thing */
 #ifdef _WIN32
 #include <string.h>
 
