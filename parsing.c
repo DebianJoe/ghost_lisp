@@ -195,7 +195,7 @@ lval* builtin_op(lval* a, char* op) {
 	if (strcmp(op, "/") == 0) {
 	    if (y->num == 0) {
 		lval_del(x); lval_del(y);
-		x = lval_err("Division By Zero.");
+		x = lval_err("Division By Zero--black hole time");
 		break;
 	    }
 	    x->num /= y->num;
@@ -203,7 +203,7 @@ lval* builtin_op(lval* a, char* op) {
 	if (strcmp(op, "%") == 0) {
 	    if (y->num == 0) {
 		lval_del(x); lval_del(y);
-		x = lval_err("Division By Zero.");
+		x = lval_err("Division By Zero--black hole time.");
 		break;
 	    }
 	    x->num /= y->num;
@@ -294,7 +294,7 @@ int main(int argc, char** argv) {
     mpc_parser_t* Number = mpc_new("number");
     mpc_parser_t* Symbol = mpc_new("symbol");
     mpc_parser_t* Sexpr = mpc_new("sexpr");
-    mpc_parser_t* Expr =mpc_new("expr");
+    mpc_parser_t* Expr = mpc_new("expr");
     mpc_parser_t* Lispy =mpc_new("lispy");
 
     /* Define them with the following */
