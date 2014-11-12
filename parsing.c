@@ -288,29 +288,6 @@ lval* lval_read(mpc_ast_t* t) {
     return x;
 }
 
-/* lval eval(mpc_ast_t* t) { */
-    
-/*     if(strstr(t->tag, "number")) { */
-/* 	/\* Check if ther is some error in conversion *\/ */
-/* 	errno = 0; */
-/* 	long x = strtol(t->contents, NULL, 10); */
-/* 	return errno != ERANGE ? lval_num(x) : lval_err(LERR_BAD_NUM); */
-/*     } */
-
-/*     /\* the operator is always the second child *\/ */
-/*     char* op = t->children[1]->contents; */
-/*     lval x = eval(t->children[2]); */
-    
-/*     /\* Iterate the remaining children and combining *\/ */
-/*     int i = 3; */
-/*     while (strstr(t->children[i]->tag, "expr")) { */
-/* 	x = eval_op(x, op, eval(t->children[i])); */
-/* 	i++; */
-/*     } */
-
-/*     return x; */
-/* } */
-
 int main(int argc, char** argv) {
 
     /* Create Some Parsers */
