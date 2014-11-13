@@ -189,7 +189,6 @@ void lval_del(lval* v) {
 	free(v->cell);
 	break;
     }
-
     /*Free the memory allocated for the 'lval' struct itself */
     free(v);
 }
@@ -277,7 +276,6 @@ void lval_print_expr(lval* v, char open, char close) {
 
 	/* Print Value contained within */
 	lval_print(v->cell[i]);
-
 	/* Don't print trailing space if last element */
 	if (i != (v->count-1)) {
 	    putchar(' ');
@@ -429,7 +427,6 @@ void lenv_put(lenv* e, lval* k, lval* v) {
     /* Iterate over all items in environment */
     /* This is to see if variable already exists */
     for (int i = 0; i < e->count; i++) {
-
 	/* If variable is found delete item at that position */
 	/* And replace with variable supplied by user */
 	if (strcmp(e->syms[i], k->sym) == 0) {
