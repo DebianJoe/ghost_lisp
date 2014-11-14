@@ -1,5 +1,7 @@
 #include "mpc.h" /* link to mpc parser */
 #include <stdlib.h>
+#include <unistd.h>
+
 static char buffer[2048];
 
 /* Fake readline function */
@@ -664,6 +666,14 @@ lval* builtin_exit() {
     exit(0);
 }
 
+lval* builtin_spawn(lenv* e, lval* a) {
+    LASSERT_NUM("spawn", a, 1);
+    LASSERT_TYPE("spawn", a, 0, LVAL_STR);
+
+    printf("Program to run %s\n", a->cell[0]->str);
+    return lval_sexpr();
+}
+    
 lval* builtin_load(lenv* e, lval* a) {
     LASSERT_NUM("load", a, 1);
     LASSERT_TYPE("load", a, 0, LVAL_STR);
@@ -775,6 +785,7 @@ void lenv_add_builtins(lenv* e) {
 
     /* System Functions */
     lenv_add_builtin(e, "exit", builtin_exit);
+    lenv_add_builtin(e, "spawn", builtin_spawn);
 }
 
 /* Evaluation */
