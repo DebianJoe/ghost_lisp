@@ -1,12 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "mpc.h" /* link to mpc parser */
-
-/* If we are compiling on Windows compile these functions */
-/* allow the preprocessor to do its thing */
-#ifdef _WIN32
-#include <string.h>
-
+#include <stdlib.h>
 static char buffer[2048];
 
 /* Fake readline function */
@@ -21,15 +14,6 @@ char* readline(char* prompt) {
 
 /* Fake add_history function */
 void add_history(char* unused) {}
-
-/* Otherwise include the editline headers */
-#else
-
-/* these do not perfectly suit my needs. */
-/* so, let's make new editline headers later. */
-#include <editline/readline.h>
-#include <editline/history.h>
-#endif
 
 /* Parser Declariations */
 
@@ -91,7 +75,7 @@ lval* lval_err(char* fmt, ...) {
     va_list va;
     va_start(va, fmt);
 
-    /* Allocate 512 bytes of space */
+    /* Allocate 512 bytes of space, You're welcome Pidsley :)  */
     v->err = malloc(512);
 
     /* printf the error string with a maximum of 511 characters */
@@ -669,12 +653,16 @@ lval* builtin_if(lenv* e, lval* a) {
     } else {
 	x = lval_eval(e, lval_pop(a, 2));
     }
-
     lval_del(a);
     return x;
 }
 
 lval* lval_read(mpc_ast_t* t);
+
+lval* builtin_exit() {
+    printf("In case of fire\nplease (exit {using stairs}).\n");
+    exit(0);
+}
 
 lval* builtin_load(lenv* e, lval* a) {
     LASSERT_NUM("load", a, 1);
@@ -784,6 +772,9 @@ void lenv_add_builtins(lenv* e) {
     lenv_add_builtin(e, "load",  builtin_load);
     lenv_add_builtin(e, "error", builtin_error);
     lenv_add_builtin(e, "print", builtin_print);
+
+    /* System Functions */
+    lenv_add_builtin(e, "exit", builtin_exit);
 }
 
 /* Evaluation */
@@ -802,23 +793,19 @@ lval* lval_call(lenv* e, lval* f, lval* a) {
 	    return lval_err("Function passed too many arguments. "
 			    "Got %i, Expected %i.", given, total);
 	}
-
 	lval* sym = lval_pop(f->formals, 0);
 
 	if (strcmp(sym->sym, "&") == 0) {
-
 	    if (f->formals->count != 1) {
 		lval_del(a);
 		return lval_err("Function format invalid. "
 				"Symbol '&' not followed by single symbol.");
 	    }
-
 	    lval* nsym = lval_pop(f->formals, 0);
 	    lenv_put(f->env, nsym, builtin_list(e, a));
 	    lval_del(sym); lval_del(nsym);
 	    break;
 	}
-
 	lval* val = lval_pop(a, 0);
 	lenv_put(f->env, sym, val);
 	lval_del(sym); lval_del(val);
@@ -841,14 +828,12 @@ lval* lval_call(lenv* e, lval* f, lval* a) {
 	lenv_put(f->env, sym, val);
 	lval_del(sym); lval_del(val);
     }
-
     if (f->formals->count == 0) {
 	f->env->par = e;
 	return builtin_eval(f->env, lval_add(lval_sexpr(), lval_copy(f->body)));
     } else {
 	return lval_copy(f);
     }
-
 }
 
 lval* lval_eval_sexpr(lenv* e, lval* v) {
@@ -868,7 +853,6 @@ lval* lval_eval_sexpr(lenv* e, lval* v) {
 	lval_del(f); lval_del(v);
 	return err;
     }
-
     lval* result = lval_call(e, f, v);
     lval_del(f);
     return result;
@@ -972,7 +956,10 @@ int main(int argc, char** argv) {
 	puts("...hold me, I'm scared  (o o)");
 	puts("                        | O \\ ");
 	puts("                        \\    \\ ");
-	puts("Press C^c to exit        `~~~'\n");
+	puts("Press C^c to exit        `~~~'");
+	puts("if in emacs (as inferior-lisp mode)");
+	puts("use C^c C^c");
+	puts("...or use `exit()`\n");
 
 	/* Infinity loops! */
 	while (1) {
@@ -993,9 +980,7 @@ int main(int argc, char** argv) {
 		mpc_err_print(r.error);
 		mpc_err_delete(r.error);
 	    }
-
 	    free(input);
-
 	}
     }
 
@@ -1004,13 +989,10 @@ int main(int argc, char** argv) {
 
 	/* loop over each supplied filename (starting from 1) */
 	for (int i = 1; i < argc; i++) {
-
 	    /* Argument list with a single argument, the filename */
 	    lval* args = lval_add(lval_sexpr(), lval_str(argv[i]));
-
 	    /* Pass to builtin load and get the result */
 	    lval* x = builtin_load(e, args);
-
 	    /* If the result is an error be sure to print it */
 	    if (x->type == LVAL_ERR) { lval_println(x); }
 	    lval_del(x);
