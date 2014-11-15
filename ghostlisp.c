@@ -669,8 +669,7 @@ lval* builtin_exit() {
 lval* builtin_spawn(lenv* e, lval* a) {
     LASSERT_NUM("spawn", a, 1);
     LASSERT_TYPE("spawn", a, 0, LVAL_STR);
-    char *p = a->cell[0]->str;
-    printf("%s Spawned", a->cell[0]->str); system(p);
+    system(a->cell[0]->str);
     return lval_sexpr();
 }
     
