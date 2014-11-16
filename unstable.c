@@ -49,6 +49,7 @@ typedef lval*(*lbuiltin)(lenv*, lval*);
 /* Declare New lval struct for error handling */
 struct lval {
     int type;
+    /* TESTCODE: num set as float rather than int */
     float num;
     char* err;
     char* sym;
@@ -301,6 +302,7 @@ void lval_print(lval* v) {
 	    putchar(')');
 	}
 	break;
+	/*TESTCODE: %f for LVAL_NUM rather than %li */
     case LVAL_NUM:   printf("%f", v->num); break;
     case LVAL_ERR:   printf("Error: %s", v->err); break;
     case LVAL_SYM:   printf("%s", v->sym); break;
