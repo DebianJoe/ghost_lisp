@@ -19,4 +19,4 @@ Due to the inspiration and guidance from buildyourownlisp.com, this is released 
 
 how to build
 =====
-Clone files, cd to dir, use 'make', run binary, profit.
+Clone files, cd to dir, use 'make all', run binary, profit.  If you'd like to help with expanding the functionality of ghostlisp, then review the comments at the top of unstable.c and use 'make debug' to compile with unstable.c.  As unstable is found to work correctly and has been tested, then changes will be merged into the stable file, and new problems are to be tackled in unstable.
