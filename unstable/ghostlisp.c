@@ -3,6 +3,11 @@
 #include <unistd.h>
 
 static char buffer[2048];
+/* Current status of unstable.... */
+/* floats being implemented for math */
+/* truncated values are returned */
+/* test code tagged with TESTCODE */
+
 
 /* Fake readline function */
 char* readline(char* prompt) {
