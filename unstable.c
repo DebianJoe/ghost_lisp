@@ -49,8 +49,7 @@ typedef lval*(*lbuiltin)(lenv*, lval*);
 /* Declare New lval struct for error handling */
 struct lval {
     int type;
-    /* TESTCODE: num set as float rather than int */
-    float num;
+    long int num;
     char* err;
     char* sym;
     char* str;
@@ -302,8 +301,7 @@ void lval_print(lval* v) {
 	    putchar(')');
 	}
 	break;
-	/*TESTCODE: %f for LVAL_NUM rather than %li */
-    case LVAL_NUM:   printf("%f", v->num); break;
+    case LVAL_NUM:   printf("%li", v->num); break;
     case LVAL_ERR:   printf("Error: %s", v->err); break;
     case LVAL_SYM:   printf("%s", v->sym); break;
     case LVAL_STR:   lval_print_str(v); break;
@@ -763,10 +761,13 @@ void lenv_add_builtins(lenv* e) {
 
     /* List Functions */
     lenv_add_builtin(e, "list", builtin_list);
+    lenv_add_builtin(e, "cons", builtin_list);
     lenv_add_builtin(e, "head", builtin_head);
     lenv_add_builtin(e, "tail", builtin_tail);
     lenv_add_builtin(e, "eval", builtin_eval);
     lenv_add_builtin(e, "join", builtin_join);
+    lenv_add_builtin(e, "car" , builtin_head);
+    lenv_add_builtin(e, "cdr" , builtin_tail);
 
     /* Mathematical Functions */
     lenv_add_builtin(e, "+", builtin_add);
@@ -969,7 +970,7 @@ int main(int argc, char** argv) {
 
     /* Interactive Prompt */
     if (argc == 1) {
-	puts("\n\nGhost Lisp v. 0.0.0.0.1  .-.");
+	puts("\n\nGhost Lisp v. 0.0.0.0.2  .-.");
 	puts("...hold me, I'm scared  (o o)");
 	puts("                        | O \\ ");
 	puts("                        \\    \\ ");

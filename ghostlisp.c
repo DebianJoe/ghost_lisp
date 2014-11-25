@@ -3,6 +3,11 @@
 #include <unistd.h>
 
 static char buffer[2048];
+/* Current status of unstable.... */
+/* floats being implemented for math */
+/* truncated values are returned */
+/* test code tagged with TESTCODE */
+
 
 /* Fake readline function */
 char* readline(char* prompt) {
@@ -44,7 +49,7 @@ typedef lval*(*lbuiltin)(lenv*, lval*);
 /* Declare New lval struct for error handling */
 struct lval {
     int type;
-    long num;
+    long int num;
     char* err;
     char* sym;
     char* str;
@@ -756,10 +761,13 @@ void lenv_add_builtins(lenv* e) {
 
     /* List Functions */
     lenv_add_builtin(e, "list", builtin_list);
+    lenv_add_builtin(e, "cons", builtin_list);
     lenv_add_builtin(e, "head", builtin_head);
     lenv_add_builtin(e, "tail", builtin_tail);
     lenv_add_builtin(e, "eval", builtin_eval);
     lenv_add_builtin(e, "join", builtin_join);
+    lenv_add_builtin(e, "car" , builtin_head);
+    lenv_add_builtin(e, "cdr" , builtin_tail);
 
     /* Mathematical Functions */
     lenv_add_builtin(e, "+", builtin_add);
@@ -944,7 +952,7 @@ int main(int argc, char** argv) {
     /* Define them with the following */
     mpca_lang(MPCA_LANG_DEFAULT,
 	      "                                                    \
-      number : /-?[0-9]+/ ;                              \
+      number : /-?[0-9\\.0-9]+/                  ;       \
       symbol : /[a-zA-Z0-9_+\\-*\\/\\\\=<>\\%!&]+/ ;     \
       string  : /\"(\\\\.|[^\"])*\"/ ;			 \
       comment : /;[^\\r\\n]*/ ;				 \
@@ -962,7 +970,7 @@ int main(int argc, char** argv) {
 
     /* Interactive Prompt */
     if (argc == 1) {
-	puts("\n\nGhost Lisp v. 0.0.0.0.1  .-.");
+	puts("\n\nGhost Lisp v. 0.0.0.0.2  .-.");
 	puts("...hold me, I'm scared  (o o)");
 	puts("                        | O \\ ");
 	puts("                        \\    \\ ");
