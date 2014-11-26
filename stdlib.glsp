@@ -15,9 +15,15 @@
      def (car f) (\ (cdr f) b)
 }))
 
+;; The below for Schemers
+(def {define} (\ {f b} {
+     def (car f) (\ (cdr f) b)
+}))
+
+
 ; Unpack List for Function
 (fun {unpack f l} {
-  eval (join (list f) l)
+     eval (join (list f) l)
 })
 
 ; Pack List for Function
@@ -29,9 +35,9 @@
 
 ; Perform Several things in Sequence
 (fun {do & l} {
-  if (== l nil)
-    {nil}
-    {last l}
+     if (== l nil)
+     {nil}
+     {last l}
 })
 
 ; Define "let" function
