@@ -488,9 +488,9 @@ lval* builtin_list(lenv* e, lval* a) {
 }
 
 lval* builtin_head(lenv* e, lval* a) {
-    LASSERT_NUM("head", a, 1);
-    LASSERT_TYPE("head", a, 0, LVAL_QEXPR);
-    LASSERT_NOT_EMPTY("head", a, 0);
+    LASSERT_NUM("head/car", a, 1);
+    LASSERT_TYPE("head/car", a, 0, LVAL_QEXPR);
+    LASSERT_NOT_EMPTY("head/car", a, 0);
 
     lval* v = lval_take(a, 0);
     while (v->count > 1) { lval_del(lval_pop(v, 1)); }
@@ -498,9 +498,9 @@ lval* builtin_head(lenv* e, lval* a) {
 }
 
 lval* builtin_tail(lenv* e, lval* a) {
-    LASSERT_NUM("tail", a, 1);
-    LASSERT_TYPE("tail", a, 0, LVAL_QEXPR);
-    LASSERT_NOT_EMPTY("tail", a, 0);
+    LASSERT_NUM("tail/cdr", a, 1);
+    LASSERT_TYPE("tail/cdr", a, 0, LVAL_QEXPR);
+    LASSERT_NOT_EMPTY("tail/cdr", a, 0);
 
     lval* v = lval_take(a, 0);
     lval_del(lval_pop(v, 0));
@@ -519,7 +519,8 @@ lval* builtin_eval(lenv* e, lval* a) {
 lval* builtin_join(lenv* e, lval* a) {
 
     for (int i = 0; i < a->count; i++) {
-	LASSERT_TYPE("join", a, i, LVAL_QEXPR);
+	/* TESTCODE: twin declare for debug */
+	LASSERT_TYPE("join/cons", a, i, LVAL_QEXPR);
     }
 
     lval* x = lval_pop(a, 0);
