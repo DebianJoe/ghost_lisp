@@ -3,6 +3,14 @@ ghost_lisp
 
 A home-made lisp dialect.
 
+versioning notes
+=========
+0.0.0.0.3
+* support for floating point numbers added, including mixing integers and negatives.
+
+0.0.0.0.2
+* implementation of car, cdr, cons.  'stdlib.glsp' made to support "Scheme-y" use of 'define', and some recursive functionality included.  Spawn of external programs.
+
 philosophy
 =====
 This is more about making transparent primitives (heh, 'ghost' 'tranparent'...get it?...I'll just see myself out now.) than trying to make a better lisp.  sbcl or scheme are already in existence.  This is just a project for lisp hackers and people who want to poke stuff to learn.

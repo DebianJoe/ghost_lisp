@@ -3,11 +3,6 @@
 #include <unistd.h>
 
 static char buffer[2048];
-/* Current status of unstable.... */
-/* floats being implemented for math */
-/* truncated values are returned */
-/* test code tagged with TESTCODE */
-
 
 /* Fake readline function */
 char* readline(char* prompt) {
@@ -49,7 +44,7 @@ typedef lval*(*lbuiltin)(lenv*, lval*);
 /* Declare New lval struct for error handling */
 struct lval {
     int type;
-    long int num;
+    double num;
     char* err;
     char* sym;
     char* str;
@@ -66,7 +61,7 @@ struct lval {
 };
 
 /* Create a pointer to new number type lval */
-lval* lval_num(long x) {
+lval* lval_num(double x) {
     lval* v = malloc(sizeof(lval));
     v->type = LVAL_NUM;
     v->num = x;
@@ -301,7 +296,8 @@ void lval_print(lval* v) {
 	    putchar(')');
 	}
 	break;
-    case LVAL_NUM:   printf("%li", v->num); break;
+	/* TESTCODE  for v3 %li %f sub*/
+    case LVAL_NUM:   printf("%.2f", v->num); break;
     case LVAL_ERR:   printf("Error: %s", v->err); break;
     case LVAL_SYM:   printf("%s", v->sym); break;
     case LVAL_STR:   lval_print_str(v); break;
@@ -891,7 +887,9 @@ lval* lval_eval(lenv* e, lval* v) {
 
 lval* lval_read_num(mpc_ast_t* t) {
     errno = 0;
-    long x = strtol(t->contents, NULL, 10);
+    /* TESTCODE */
+    /*     long x = strtol(t->contents, NULL, 10); */
+    double x = strtof(t->contents, NULL);
     return errno != ERANGE ? lval_num(x) : lval_err("invalid number");
 }
 
@@ -951,9 +949,12 @@ int main(int argc, char** argv) {
     Lispy   = mpc_new("lispy");
 
     /* Define them with the following */
+    /* TESTCODE for v3, this is original regex */
+/*     number : /-?[0-9\\.0-9]+/                  ;	\*/
+
     mpca_lang(MPCA_LANG_DEFAULT,
-	      "                                                    \
-      number : /-?[0-9\\.0-9]+/                  ;       \
+	      "                                          \
+      number : /[-+]?([0-9]*\\.[0-9]+|[0-9]+)/      ;    \
       symbol : /[a-zA-Z0-9_+\\-*\\/\\\\=<>\\%!&]+/ ;     \
       string  : /\"(\\\\.|[^\"])*\"/ ;			 \
       comment : /;[^\\r\\n]*/ ;				 \
@@ -971,7 +972,7 @@ int main(int argc, char** argv) {
 
     /* Interactive Prompt */
     if (argc == 1) {
-	puts("\n\nGhost Lisp v. 0.0.0.0.2  .-.");
+	puts("\n\nGhost Lisp v. 0.0.0.0.3  .-.");
 	puts("...hold me, I'm scared  (o o)");
 	puts("                        | O \\ ");
 	puts("                        \\    \\ ");
