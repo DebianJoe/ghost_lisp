@@ -12,7 +12,7 @@
 ;; Function Definitions
 
 (def {fun} (\ {f b} {
-     def (head f) (\ (tail f) b)
+     def (car f) (\ (cdr f) b)
 }))
 
 ; Unpack List for Function
@@ -50,15 +50,15 @@
 (fun {comp f g x} {f (g x)})
 
 ; First, Second, or Third Item in List
-(fun {fst l} { eval (head l) })
-(fun {snd l} { eval (head (tail l)) })
-(fun {trd l} { eval (head (tail (tail l))) })
+(fun {fst l} { eval (car l) })
+(fun {snd l} { eval (car (cdr l)) })
+(fun {trd l} { eval (car (cdr (cdr l))) })
 
 ; List Length
 (fun {len l} {
   if (== l nil)
     {0}
-    {+ 1 (len (tail l))}
+    {+ 1 (len (cdr l))}
 })
 
 ; Nth item in List
@@ -75,7 +75,7 @@
 (fun {take n l} {
   if (== n 0)
     {nil}
-    {join (head l) (take (- n 1) (tail l))}
+    {join (car l) (take (- n 1) (tail l))}
 })
 
 ; Drop N items
