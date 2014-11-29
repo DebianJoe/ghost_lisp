@@ -111,6 +111,11 @@
 ; Default Case
 (def {otherwise} true)
 
+; Absolute value
+(define {abs x} {
+	if (< x 0) {* -1 x}
+	{x}})
+
 ; Case switch
 (fun {case x & cs} {
   if (== cs nil)
