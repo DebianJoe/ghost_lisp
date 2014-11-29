@@ -1,7 +1,11 @@
 ## Ghostlisp Sytax Highlighting
 
-syntax "GhostLisp" "\.glsp[2345s~]?$"
+## To use add:
+## include "/full/path/to/gl.nanorc"
+## in your .nanorc for syntax highlighting for .glsp files.
 
+## file association
+syntax "GhostLisp" "\.glsp[2345s~]?$"
 ## Operators
 color red "\<(def|print|error|spawn)\>"
 ## builtins
@@ -10,3 +14,5 @@ color blue "\<(eval|join|load)\>"
 ## strings
 color brightyellow "<[^=       ]*>" ""(\.|[^"])*""
 ## comments
+color magenta "(^|[[:space:]#])#.*"
+color magenta "(^|[[:space:];]);.*"
