@@ -1,0 +1,43 @@
+;; This document to discuss particulars of the language ;;
+
+Symbolic Builtins:
+	
+	;; VARIABLE FUNCTIONS
+	\    = lambda
+	def	 = define
+	=    = builtin put
+	
+	;; LIST FUNCTIONS
+	list = make list
+	cons = construct list
+	head = retrieve first item of list
+	car  = same as head, traditional
+	tail = retrieve all but first item from list
+	cdr  = same as tail, traditional
+	eval = evaluate expression
+	join = join two or more lists together
+	
+	;; MATHMATICAL FUNCTIONS
+	+    = add
+	-    = subtract
+	*    = multiply
+	/    = divide
+	%    = modulus
+	
+	;; COMPARISON FUNCTIONS
+	if   = if compare
+	==   = equality check
+	!=   = inequality check
+	>    = greater than
+	<    = less than
+	>=   = greater than or equal
+	<=   = less than or equal
+	
+	;; STRING FUNCTIONS
+	load  = load lisp script (load "/full/path/to/file")
+	error = define new error
+	print = print output to user
+	
+	;; SYSTEM FUNCTIONS
+	spawn = execvp a child process (spawn "/bin/sh")
+	exit  = cleanly exit program   (exit (foobar))
