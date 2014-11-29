@@ -5,6 +5,10 @@ A home-made lisp dialect.
 
 versioning notes
 =========
+0.0.0.0.4 (current work)
+* added a module for nano highlighting of ghostlisp (.glsp) programs.
+* styleguide for some of the 'odd' syntax used.
+
 0.0.0.0.3
 * support for floating point numbers added, including mixing integers and negatives.
 
