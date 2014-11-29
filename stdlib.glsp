@@ -1,6 +1,6 @@
 ;; The Ghost Lisp Standard Library      ;;
 ;; Load via argvs, or using             ;;
-;; > load "/path/to/stdlib.glsp         ;;
+;; > load "/path/to/stdlib.glsp"        ;;
 ;; From the REPL                        ;;
 ;; can be included in script using load ;;
 ;; Atoms

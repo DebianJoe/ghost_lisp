@@ -1,0 +1,12 @@
+## Ghostlisp Sytax Highlighting
+
+syntax "GhostLisp" "\.glsp[2345s~]?$"
+
+## Operators
+color red "\<(def|print|error|spawn)\>"
+## builtins
+color green "\<(list|cons|head|tail|car|cdr)\>"
+color blue "\<(eval|join|load)\>"
+## strings
+color brightyellow "<[^=       ]*>" ""(\.|[^"])*""
+## comments
