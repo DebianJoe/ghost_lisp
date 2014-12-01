@@ -66,4 +66,7 @@ Notes on using Quoted Expressions (Qexpr)
       Ghostlisp by its simplistic nature attempts to evaluate normally
       enclosed (parentheticals) earlier in the process.  So, rather than
       passing the enclosed function or list, it will simply evaluate it 
-      as a symbolic expression and then complain that you passed a result.
+      as a symbolic expression and then complain that you passed a result:
+
+      Error:  Function 'foobar' passed incorrect type for argument 1. 
+      Got S-Expression, Expected Q-Expression.
