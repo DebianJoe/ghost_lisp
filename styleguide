@@ -1,4 +1,11 @@
 ;; This document to discuss particulars of the language ;;
+;;        ___
+;;      _/ ^^\
+;;     ( \  @/__
+;;      \    \__)==|-------- ghostlisp
+;;      /     \
+;;     /      _\
+;;     `"""""``
 
 Symbolic Builtins:
 	
@@ -41,3 +48,22 @@ Symbolic Builtins:
 	;; SYSTEM FUNCTIONS
 	spawn = execvp a child process (spawn "/bin/sh")
 	exit  = cleanly exit program   (exit (foobar))
+
+Notes on using Quoted Expressions (Qexpr)
+      Quoted expressions are enclosed with {squiggly-braces} and are
+      used to signify lists 
+      > {items in a list}
+      > {1 2 3 4 5}
+
+      They are also used for delimiting variables and sections of
+      functions.  The best examples of usage are in the stdlib.glsp
+      file.
+
+      > (def {define} (\ f l) {eval (join (list f) l)})
+      > (def {nil} {})
+      > (def {true} 1)
+
+      Ghostlisp by its simplistic nature attempts to evaluate normally
+      enclosed (parentheticals) earlier in the process.  So, rather than
+      passing the enclosed function or list, it will simply evaluate it 
+      as a symbolic expression and then complain that you passed a result.
