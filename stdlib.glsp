@@ -109,6 +109,7 @@
 })
 
 ; Default Case
+(def {else} true)
 (def {otherwise} true)
 
 ; Absolute value
